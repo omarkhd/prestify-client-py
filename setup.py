@@ -5,7 +5,7 @@ from distutils.core import setup
 setup(
 	name='prestify',
 	packages=['prestify'],
-	version='0.1',
+	version='0.1.2',
 	description='Prestify Python Client',
 	author='Omar Karim Martín Cornejo',
 	author_email='omarkhd.mx@gmail.com',

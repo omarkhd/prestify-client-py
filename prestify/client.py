@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-import urllib
 import base64
 import json
+try:
+	from urllib.parse import urlencode
+except ImportError:
+	from urllib import urlencode
 
 import requests
 
@@ -37,14 +40,13 @@ class Report(object):
 			raise Exception('URL can only be obtained for an html report')
 
 		request = requests.get(str(self))
-		return '%s%s' % (self.PRESTIFY_SERVICE_URL, request.headers['Location'])
+		return '{0}{1}'.format(self.PRESTIFY_SERVICE_URL, request.headers['Location'])
 
 	def __str__(self):
-		return '%s/reports/%s?%s' % (
+		return '{0}/reports/{1}?{2}'.format(
 			self.PRESTIFY_SERVICE_URL,
 			self.name,
-			urllib.urlencode({
-				'format': self.format,
-				'parameters': base64.b64encode(json.dumps(self._parameters))
-			})
+			urlencode(dict(format=self.format, parameters=base64.b64encode(
+				json.dumps(self._parameters).decode('utf-8')
+			)))
 		)
