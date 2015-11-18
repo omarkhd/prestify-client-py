@@ -47,6 +47,6 @@ class Report(object):
 			self.PRESTIFY_SERVICE_URL,
 			self.name,
 			urlencode(dict(format=self.format, parameters=base64.b64encode(
-				json.dumps(self._parameters).decode('utf-8')
+				json.dumps(self._parameters).encode('utf-8')
 			)))
 		)
