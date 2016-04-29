@@ -11,6 +11,7 @@ import requests
 
 class Report(object):
 	PRESTIFY_SERVICE_URL = None
+	_VALID_FORMATS = ('pdf', 'rtf', 'xls', 'xlsx', 'html')
 
 	def __init__(self, name=None):
 		self.name = name
@@ -26,7 +27,7 @@ class Report(object):
 		return None
 
 	def fetch(self):
-		if self.format not in ('pdf', 'rtf', 'xls', 'xlsx', 'html'):
+		if self.format not in self._VALID_FORMATS:
 			raise Exception('Invalid format')
 
 		if self.format == 'html':
